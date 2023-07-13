@@ -82,6 +82,8 @@ $user = $userModel->findByUserId($userId);
 		<div id="footer">
 			<script>
 				const base_url = '<?= $baseUrl; ?>'
+				let controller = '<?= $controller; ?>'
+				let action = '<?= $action; ?>'
 			</script>
 			<?php 
 			echo $this->Html->script('jquery-3.7.0.min');

@@ -19,9 +19,7 @@ App::uses('HtmlHelper', 'View/Helper');
                                 <div class="form-outline mb-4">
                                     <label for="recepient" class="fw-bold mb-2">TO:</label>
                                     <select class="form-select" name="recepient" id="recepient">
-                                        <!-- <option selected hidden>Please select a recepient</option> -->
                                     </select>
-                             
                                 </div>
                                 <div class="form-floating">
                                     <textarea class="form-control" name="content" id="content" style="height: 200px"></textarea>
