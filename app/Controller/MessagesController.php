@@ -14,16 +14,6 @@ class MessagesController extends AppController
         $this->Auth->allow('listMessage', 'getMessages', 'showMore', 'deleteConvo', 'newMessage', 'getRecepient', 'sendMessage', 'viewMessage', 'getMessageDetail', 'deleteChat', 'sendReply');
     }
 
-    private function checkSession()
-    {
-        if (CakeSession::check('user')) {
-            return true;
-        } else {
-            $this->redirect(array('action' => 'index'));
-            return false;
-        }
-    }
-
     public function getRecepient()
     {
         if ($this->request->is("get")) {
@@ -41,7 +31,6 @@ class MessagesController extends AppController
                 }
             } else {
                 $results['result'][0]['text'] = 'No User Found';
-                // $results['result'][0]['id'] = $value['users']['user_id'];
             }
 
             echo json_encode($results);
@@ -100,12 +89,17 @@ class MessagesController extends AppController
             );
 
             $this->Reply->set($data); 
-            if($this->Reply->save($data)){
-                $response = array('status' => 'success', 'message' => 'Successfully sent.');
+            if ($this->Reply->validates()){
+                if($this->Reply->save($data)){
+                    $response = array('status' => 'success', 'message' => 'Successfully sent.');
+                }else{
+                    $response = array('status' => 'error', 'message' => 'Failed to send reply.');
+                }
             }else{
-                $response = array('status' => 'error', 'message' => 'Failed to send reply.');
-                debug($this->Reply->validationErrors);
+                $errors = $this->Reply->validationErrors;
+                $response = array('status' => 'error', 'errors' => $errors);
             }
+           
 
             echo json_encode($response);
         }
@@ -115,102 +109,31 @@ class MessagesController extends AppController
 
     public function listMessage()
     {
-        if ($this->checkSession()) {
-            $userId = $this->Session->read('user');
-            $user = $this->Users->findByUserId($userId);
-            $this->set('user', $user);
-            $this->set('baseUrl', $this->baseUrl);
-            $this->render('/Pages/message');
-        }
+        $userId = $this->Session->read('user');
+        $user = $this->Users->findByUserId($userId);
+        $this->set('user', $user);
+        $this->set('baseUrl', $this->baseUrl);
+        $this->render('/Pages/message');
     }
 
     public function viewMessage()
     {
-        if ($this->checkSession()) {
-            $userId = $this->Session->read('user');
-            $user = $this->Users->findByUserId($userId);
-            $this->set('user', $user);
-            $this->set('baseUrl', $this->baseUrl);
-            $this->render('/Pages/messageHistory');
-        }
+        $userId = $this->Session->read('user');
+        $user = $this->Users->findByUserId($userId);
+        $this->set('user', $user);
+        $this->set('baseUrl', $this->baseUrl);
+        $this->render('/Pages/messageHistory');
     }
 
 
     public function newMessage()
     {
-        if ($this->checkSession()) {
-            $userId = $this->Session->read('user');
-            $user = $this->Users->findByUserId($userId);
-            $this->set('user', $user);
-            $this->set('baseUrl', $this->baseUrl);
-            $this->render('/Pages/newMessage');
-        }
+        $userId = $this->Session->read('user');
+        $user = $this->Users->findByUserId($userId);
+        $this->set('user', $user);
+        $this->set('baseUrl', $this->baseUrl);
+        $this->render('/Pages/newMessage');
     }
-
-    // public function getMessages($offset = 0, $limit = 20)
-    // {
-    //     $userId = $this->Session->read('user');
-    //     // Perform the raw query
-    //     $query = "
-    //     SELECT m.message_id, m.to_fk_user_id, m.from_fk_user_id, m.content, m.date_sent, 
-    //         CASE
-    //             WHEN m.from_fk_user_id = :userId THEN u2.name
-    //             ELSE u1.name
-    //         END AS name,
-    //         CASE
-    //             WHEN m.from_fk_user_id = :userId THEN u2.photo
-    //             ELSE u1.photo
-    //         END AS photo,
-    //         CASE
-    //             WHEN m.from_fk_user_id = :userId THEN u2.user_id
-    //             ELSE u1.user_id
-    //         END AS user_id
-    //     FROM messages m
-    //     LEFT JOIN users u1 ON m.from_fk_user_id = u1.user_id
-    //     LEFT JOIN users u2 ON m.to_fk_user_id = u2.user_id
-    //     WHERE (m.to_fk_user_id = :userId AND m.from_fk_user_id = :userId)
-    //         OR (m.to_fk_user_id != m.from_fk_user_id AND (m.to_fk_user_id = :userId OR m.from_fk_user_id = :userId))
-    //         AND (m.from_fk_user_id != :userId OR m.to_fk_user_id != :userId)
-    //     ORDER BY m.date_sent DESC
-    // ";
-
-    //     $messages = $this->Message->query($query, array('userId' => $userId));
-
-    //     if (!empty($messages)) {
-    //         $latestMessages = array();
-
-    //         foreach ($messages as $message) {
-    //             $toUserId = $message['m']['to_fk_user_id'];
-    //             $fromUserId = $message['m']['from_fk_user_id'];
-    //             $key = $toUserId . '_' . $fromUserId;
-    //             if (!isset($latestMessages[$key]) || $message['m']['date_sent'] > $latestMessages[$key]['m']['date_sent']) {
-    //                 $latestMessages[$key] = $message;
-    //             }
-    //         }
-
-    //         // Set offset and limit
-    //         $slicedMessages = array_slice($latestMessages, $offset, $limit);
-    //         $slicedMessagesLength = count($latestMessages);
-
-    //         // Prepare the response data
-    //         $data = array();
-    //         $data['messages'] = array_values($slicedMessages); // Reset array keys
-    //         $data['offset'] = $offset;
-    //         $data['limit'] = $limit;
-    //         $data['length'] = $slicedMessagesLength;
-
-    //         echo '<pre>';
-    //         print_r($data);
-    //         exit;
-
-    //         echo json_encode($data);
-    //     } else {
-    //         echo json_encode(array());
-    //     }
-
-    //     $this->autoRender = false;
-    // }
-
 
     public function getMessages($offset = 0, $limit = 4)
     {
@@ -307,42 +230,6 @@ class MessagesController extends AppController
 
         
         $this->autoRender = false;
-        
-        // if (!empty($messages)) {
-        //     $filteredMessages = array();
-        //     $latestMessages = array();
-
-        //     foreach ($messages as $message) {
-        //         $toUserId = $message['m']['to_fk_user_id'];
-        //         $fromUserId = $message['m']['from_fk_user_id'];
-        //         $key = $toUserId . '_' . $fromUserId;
-        //         if (!isset($latestMessages[$key]) || $message['m']['date_sent'] > $latestMessages[$key]['m']['date_sent']) {
-        //             $latestMessages[$key] = $message;
-        //         }
-        //     }
-
-        //     foreach ($latestMessages as $latestMessage) {
-        //         $filteredMessages[] = $latestMessage;
-        //     }
-
-        //     // Set offset and limit
-        //     $slicedMessages = array_slice($filteredMessages, $offset, $limit);
-        //     $slicedMessagesLength = count($filteredMessages);
-
-        //     // Prepare the response data
-        //     $data = array();
-        //     $data['messages'] = $slicedMessages;
-        //     $data['offset'] = $offset;
-        //     $data['limit'] = $limit;
-        //     $data['length'] = $slicedMessagesLength;
-        //     echo '<pre>';
-        //     print_r($data);
-        //     exit;
-        //     echo json_encode($data);
-        // } else {
-        //     echo json_encode(array());
-        // }
-
     }
 
 

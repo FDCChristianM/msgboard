@@ -12,47 +12,32 @@ class UsersController extends AppController {
         $this->Auth->allow('login', 'logout', 'register', 'registerUser', 'authenticate', 'thankyou', 'myProfile', 'editProfile', 'updateProfile', 'account', 'updateAccount');
     }
 
-    private function checkSession() {
-        if (CakeSession::check('user')) {
-            return true;
-        } else {
-            $this->redirect(array('action' => 'index'));
-            return false;
-        }
-    }    
-
     public function thankyou(){
         $this->set('baseUrl', $this->baseUrl);
         $this->render('/Pages/thankyou');
     }
 
     public function myProfile(){
-        if ($this->checkSession()) {
-            $userId = $this->Session->read('user');
-            $user = $this->Users->findByUserId($userId);
-            $this->set('user', $user);
-            $this->set('baseUrl', $this->baseUrl);
-            $this->render('/Pages/myProfile');
-        }
+        $userId = $this->Session->read('user');
+        $user = $this->Users->findByUserId($userId);
+        $this->set('user', $user);
+        $this->set('baseUrl', $this->baseUrl);
+        $this->render('/Pages/myProfile');
     }
 
     public function account(){
-        if ($this->checkSession()) {
-            $userId = $this->Session->read('user');
-            $user = $this->Users->findByUserId($userId);
-            $this->set('user', $user);
-            $this->render('/Pages/account');
-        }
+        $userId = $this->Session->read('user');
+        $user = $this->Users->findByUserId($userId);
+        $this->set('user', $user);
+        $this->render('/Pages/account');
     }
 
     public function editProfile(){
-        if ($this->checkSession()) {
-            $userId = $this->Session->read('user');
-            $user = $this->Users->findByUserId($userId);
-            $this->set('user', $user);
-            $this->set('baseUrl', $this->baseUrl);
-            $this->render('/Pages/editProfile');
-        }
+        $userId = $this->Session->read('user');
+        $user = $this->Users->findByUserId($userId);
+        $this->set('user', $user);
+        $this->set('baseUrl', $this->baseUrl);
+        $this->render('/Pages/editProfile');
     }
 
     public function updateAccount(){

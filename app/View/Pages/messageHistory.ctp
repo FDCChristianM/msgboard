@@ -11,6 +11,10 @@ $last_login = date("F j, Y g:ia", strtotime($user['Users']['last_login']));
             <!-- Account details card-->
             <div class="card mb-5">
                 <div class="card-body">
+                    <div class="error-message mb-5">
+                        <ul class="text-danger">
+                        </ul>
+                    </div>
                     <div class="row mb-4">
                         <form id="replyForm">
                             <div class="form-floating">

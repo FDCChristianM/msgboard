@@ -10,10 +10,18 @@ class AppController extends Controller {
         if ($this->name === 'CakeError' && isset($this->request->params['plugin']) && $this->request->params['plugin'] === 'DebugKit') {
             return;
         }
-    
-        $this->Auth->allow('index', 'view'); // Add other actions that are allowed
-    
-        // Other beforeFilter code...
+
+        if (!$this->Session->check('user')) {
+            $allowedActions = array('login', 'register', 'registerUser', 'authenticate');
+            if (!in_array($this->request->params['action'], $allowedActions) && !($this->request->params['controller'] === 'pages' && $this->request->params['action'] === 'display')) {
+                $this->redirect(array('controller' => 'users', 'action' => 'login'));
+            }
+        }
+        
+        if ($this->Session->check('user') && ($this->request->params['controller'] == 'pages' && $this->request->params['action'] == 'display' && $this->request->params['pass'][0] == 'login' || $this->request->params['controller'] == 'users' && $this->request->params['action'] == 'register')) {
+            // Redirect to the home page or any other appropriate page
+            $this->redirect(array('controller' => 'users', 'action' => 'myProfile'));
+        }
     }
     public $components = array(
         'Session',

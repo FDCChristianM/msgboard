@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 11:26 AM
+-- Generation Time: Jul 12, 2023 at 11:09 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,28 +40,7 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`message_id`, `to_fk_user_id`, `from_fk_user_id`, `content`, `date_sent`) VALUES
-(4, 5, 14, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2023-07-12 02:31:52'),
-(9, 2, 14, 'Hi Breanna!', '2023-07-13 01:42:05'),
-(10, 1, 14, 'Sent message', '2023-07-13 01:46:18'),
-(12, 9, 14, 'Hi stone!', '2023-07-13 01:46:35'),
-(13, 6, 14, 'Hi mellysa!', '2023-07-13 01:46:50'),
-(15, 27, 14, 'FAFA', '2023-07-13 01:47:07'),
-(16, 9, 14, 'STONE', '2023-07-13 01:47:17'),
-(17, 13, 14, 'ASASA', '2023-07-13 01:47:29'),
-(19, 19, 14, 'SDD', '2023-07-13 01:47:44'),
-(20, 19, 14, 'ASAS', '2023-07-13 01:48:04'),
-(22, 26, 14, 'AS', '2023-07-13 01:49:02'),
-(23, 7, 14, 'AS', '2023-07-13 01:49:07'),
-(27, 16, 14, 'AS', '2023-07-13 01:49:58'),
-(28, 22, 14, 'AS', '2023-07-13 01:50:01'),
-(30, 14, 1, 'This is my reply.', '2023-07-13 05:15:25'),
-(31, 1, 14, 'Oki oki salamat sa reply.', '2023-07-13 08:27:41'),
-(32, 14, 1, 'No problemo', '2023-07-13 08:28:38'),
-(34, 1, 14, 'Oki okiiii', '2023-07-13 08:54:04'),
-(36, 11, 14, 'Test2', '2023-07-13 09:00:54'),
-(37, 11, 14, 'Test3', '2023-07-13 09:03:15'),
-(38, 11, 14, 'Test4', '2023-07-13 09:05:13'),
-(39, 11, 14, 'Test5', '2023-07-13 09:05:23');
+(4, 5, 14, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2023-07-12 02:31:52');
 
 -- --------------------------------------------------------
 
@@ -87,7 +66,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `birthdate`, `gender`, `email`, `password`, `photo`, `hubby`, `date_created`, `last_login`) VALUES
-(1, 'Christian', '', 0, 'fdc.christianm@gmail.com', 'e30e63dcb6dc6258b85b7886e52773e2e2e18ef5', '', '', '2023-07-11 01:58:14', '2023-07-13 08:28:20'),
+(1, 'Christian', '', 0, 'fdc.christianm@gmail.com', '123123', '', '', '2023-07-11 01:58:14', '2023-07-07 09:29:09'),
 (2, 'Breanna Wyatt', '', 0, 'sasymaqis@mailinator.com', 'Pa$$w0rd!', '', '', '2023-07-11 01:58:14', '2023-07-07 09:29:09'),
 (3, 'Brody Weber', '', 0, 'nizirebypa@mailinator.com', 'Pa$$w0rd!', '', '', '2023-07-11 01:58:14', '2023-07-07 09:29:09'),
 (4, 'Brody Weber', '', 0, 'nizirebypa@mailinator.com', 'Pa$$w0rd!123', '', '', '2023-07-11 01:58:14', '2023-07-07 09:29:09'),
@@ -100,7 +79,7 @@ INSERT INTO `users` (`user_id`, `name`, `birthdate`, `gender`, `email`, `passwor
 (11, 'Dana Murphy', '', 0, 'hunyx@mailinator.com', 'a8cdc2b3dd81439ec348bd8966dd9f6b7da6a264', '', '', '2023-07-11 01:58:14', NULL),
 (12, 'Adena Mathews', '', 0, 'hosowejyn@mailinator.com', 'a8cdc2b3dd81439ec348bd8966dd9f6b7da6a264', '', '', '2023-07-11 01:58:14', NULL),
 (13, 'Russell Velazquez', '', 0, 'putow@mailinator.com', 'a8cdc2b3dd81439ec348bd8966dd9f6b7da6a264', '', '', '2023-07-11 01:58:14', NULL),
-(14, 'Tanner Bowman', 'July 15, 1988', 2, 'jyqy@mailinator.com', 'e30e63dcb6dc6258b85b7886e52773e2e2e18ef5', '1689239540_553548673.gif', 'Dicta et ut providen', '2023-07-11 01:58:14', '2023-07-13 08:35:03'),
+(14, 'Tanner Bowman', 'July 15, 1988', 2, 'jyqy@mailinator.com', 'e30e63dcb6dc6258b85b7886e52773e2e2e18ef5', '1689062490_1625209709.jpg', 'Dicta et ut providen', '2023-07-11 01:58:14', '2023-07-12 06:28:24'),
 (15, 'Kristen Caldwell', '', 0, 'hebesa@mailinator.com', 'a8cdc2b3dd81439ec348bd8966dd9f6b7da6a264', '', '', '2023-07-11 01:58:14', NULL),
 (16, 'Dexter Harrington', '', 0, 'syzinysase@mailinator.com', 'e30e63dcb6dc6258b85b7886e52773e2e2e18ef5', '', '', '2023-07-11 01:59:27', '2023-07-10 19:59:27'),
 (17, 'Hall Ortiz', '', 0, 'vewesyh@mailinator.com', 'a8cdc2b3dd81439ec348bd8966dd9f6b7da6a264', '', '', '2023-07-11 02:04:31', NULL),
@@ -136,7 +115,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

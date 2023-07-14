@@ -229,11 +229,27 @@ $(function () {
         const convo = $('.convo-con')
         let reply = $(this).find('textarea')
 
+        const errorMessage = $('.error-message ul')
+        let errorList = ''
+
         let res = formAjax(base_url + 'messages/sendReply', data)
         if(res){
-            reply.val('')
-            convo.empty()
-            getMessageDetail()
+            if(res.status == 'error'){
+                $.each(res.errors, function(field, messages) {
+                    $.each(messages, function(index, message) {
+                        errorList += '<li><p class="small fw-bold pt-1 mb-0">' + message + '</p></li>'
+                    })
+                })
+                errorMessage.html(errorList)
+            }else{
+                reply.val('')
+                convo.empty()
+                errorMessage.empty()
+                getMessageDetail()
+            }
+      
+        }else{
+            errorMessage.html('<li><p class="small fw-bold pt-1 mb-0">Ooops! Something went wrong. Please try again later</p></li>')
         }
     })
     
