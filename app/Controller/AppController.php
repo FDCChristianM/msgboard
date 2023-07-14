@@ -12,7 +12,7 @@ class AppController extends Controller {
         }
 
         if (!$this->Session->check('user')) {
-            $allowedActions = array('login', 'register', 'registerUser', 'authenticate');
+            $allowedActions = array('login', 'register', 'registerUser', 'authenticate', 'thankyou');
             if (!in_array($this->request->params['action'], $allowedActions) && !($this->request->params['controller'] === 'pages' && $this->request->params['action'] === 'display')) {
                 $this->redirect(array('controller' => 'users', 'action' => 'login'));
             }
